@@ -6,18 +6,21 @@ apply plugin: "application"
 
 // Library versions
 ext {
-  slf4jVersion = "1.7.2"
-  logbackVersion = "1.0.9"
+  slf4jVersion = "1.7.21"
+  logbackVersion = "1.1.7"
 
-  springVersion = "3.2.2.RELEASE"
-  springShellVersion = "1.1.0.RELEASE"
-  hateoasVersion = "0.4.0.RELEASE"
-  jacksonVersion = "1.9.12"
+  springVersion = "4.3.3.RELEASE"
+  springShellVersion = "1.2.0.RELEASE"
+  hateoasVersion = "0.21.0.RELEASE"
+  jacksonVersion = "1.9.13"
 
-  junitVersion = "4.11"
+  junitVersion = "4.12"
+
+  commonCodecVersion = "1.10"
+  hamcrestLibraryVersion = "1.4-atlassian-1"
 }
 
-installApp {
+installDist {
   into "build/install/rest-shell-$version"
 }
 
@@ -92,19 +95,19 @@ dependencies {
   compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
 
   // Commons
-  compile "commons-codec:commons-codec:1.7"
+  compile "commons-codec:commons-codec:$commonCodecVersion"
   // TODO Add multipart upload support
   //compile "commons-fileupload:commons-fileupload:1.2.2"
 
   // Testing
   testCompile "junit:junit:$junitVersion"
-  testCompile "org.hamcrest:hamcrest-library:1.3"
+  testCompile "org.hamcrest:hamcrest-library:$hamcrestLibraryVersion"
   testCompile("org.springframework:spring-test:$springVersion") { force = true }
   testRuntime("org.springframework:spring-context-support:$springVersion") { force = true }
 }
 
 // Gradle Wrapper
-task wrapper(type: Wrapper) { gradleVersion = "1.3" }
+task wrapper(type: Wrapper) { gradleVersion = "3.1" }
 
 task shell(type: JavaExec) {
   classpath = configurations.runtime
